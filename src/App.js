@@ -12,18 +12,10 @@ function App() {
   return(
     <Router>
       <Switch>
-        <Route path="/details/:id">
-          <Details />
-        </Route>
-        <Route path="/addprod">
-          <Addprod />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route exact path="/details/:id" component={Details} />
+        <Route exact path="/addprod" component={Addprod} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/" component={Home} />
 
       </Switch>
 

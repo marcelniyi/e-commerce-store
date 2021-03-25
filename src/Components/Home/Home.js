@@ -25,39 +25,39 @@ const [products, setProd] = useState("");
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://inyarwanda.com/app/webroot/img/202103/images/phio-6574471615444192.jpg"
+      src="https://firebasestorage.googleapis.com/v0/b/maxradio-73510.appspot.com/o/images%2Fbd9c5672-8d7f-3b6b-eb27-fdfc4b1ae7fe?alt=media&token=80f6a27c-3e55-4e00-9abb-780a92be6f19"
       alt="First slide"
       style={{height: '400px'}}
     />
     <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      <h3>Far cry 5</h3>
+
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://inyarwanda.com/app/webroot/img/202103/images/supr0-949031615396171.jpg"
+      src="https://firebasestorage.googleapis.com/v0/b/maxradio-73510.appspot.com/o/images%2Fe352ec45-87c1-b411-7506-c9baa4de934c?alt=media&token=2005339c-f844-4b85-9e16-a294f2ad08e5"
       alt="Second slide"
       style={{height: '400px'}}
     />
 
     <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <h3>Assassins creed</h3>
+
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://inyarwanda.com/app/webroot/img/202103/images/1302502781-4241671615442993.jpg"
+      src="https://firebasestorage.googleapis.com/v0/b/maxradio-73510.appspot.com/o/images%2F4a3440c5-4e8c-e868-8f54-292171e4ea53?alt=media&token=8c6f391d-348d-4514-aa9b-33493ce1fc37"
       alt="Third slide"
       style={{height: '400px'}}
     />
 
     <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      <h3>GTA Vice City</h3>
+
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel>
@@ -66,11 +66,11 @@ const [products, setProd] = useState("");
 
     <Row style={{marginTop: '40px'}}>
     {!products?
-      <Spinner name="pacman" color="red" style={{marginLeft: '600px'}}/>
+      <Spinner name="ball-pulse-sync" color="red" style={{marginLeft: '600px'}}/>
       :
     <>
     {products && products.map(product => (
-      <Col key={product.id}>
+      <Col key={product.id} style={{paddingBottom: '20px'}}>
       <Card style={{ width: '18rem', backgroundColor: '#343A40', border: '1px solid #343A40' }}>
         <a href={`/details/${product.id}`}>
         <Card.Img variant="top" height="300px" src={product.image} />

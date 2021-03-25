@@ -17,7 +17,7 @@ const state = useSelector(state => state.user)
         <Nav.Link href="#" style={{color: 'white'}}>Contact</Nav.Link>
       </Nav>
       <Form inline>
-        <Nav.Link href="#" style={{color: 'white'}}><Person size={40}/> </Nav.Link>
+        
         <Nav.Link href="#" style={{color: 'white'}}><Cart size={40}/> ({state.length}) </Nav.Link>
       </Form>
       </Container>
