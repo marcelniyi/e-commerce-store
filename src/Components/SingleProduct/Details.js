@@ -45,7 +45,7 @@ docRef.get().then((doc) => {
 
     <Row style={{marginTop: '40px'}}>
       <Col>
-      <Image src={products.files} thumbnail />
+      <Image src={products.files} thumbnail width={600}/>
       </Col>
       <Col>
       <Container>
