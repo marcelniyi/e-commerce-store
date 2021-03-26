@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Row, Col, Card, Badge, Carousel} from 'react-bootstrap';
 import Navigationbar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
 import { db } from '../../Configurations'
 import Spinner from 'react-spinkit'
 function Home() {
@@ -100,6 +101,7 @@ const [products, setProd] = useState("");
       </Col>
     </Row>
   </Container>
+  <Footer />
     </>
   );
 }
