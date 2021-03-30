@@ -1,31 +1,37 @@
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { combineReducers } from 'redux'
+import thunk from 'redux-thunk'
+import rootReducer from './Reducers'
 
-
-const oldproduct = localStorage.getItem('products') ? localStorage.getItem('products') : "[]";
-const user =  JSON.parse(oldproduct);
-
-function userReducer(state = user, action) {
-    switch (action.type) {
-        case 'GET_NAME':
-            return state.name
-        case 'CHANGE_NAME':
-
-            localStorage.setItem("products",JSON.stringify(action.payload));
-            return [state, action.payload];
-
-        default:
-            return state
-    }
+function saveToLocalstorage(state){
+  try {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('Products', serializedState)
+  } catch(e) {
+    console.log(e)
+  }
 }
 
-const rootReducer = combineReducers({
-    user: userReducer
-})
+function loadFromLocalStorage(){
+  try {
+    const serializedState = localStorage.getItem('Products')
+    if(serializedState === null) return undefined
+    return JSON.parse(serializedState)
+  } catch(e) {
+    console.log(e)
+    return undefined
+  }
+}
 
+const persistedState = loadFromLocalStorage()
 
-export const store = createStore(
+const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware())
+    persistedState,
+    composeWithDevTools(applyMiddleware(thunk))
 )
+
+store.subscribe(() => saveToLocalstorage(store.getState()))
+
+export default store

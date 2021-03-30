@@ -1,44 +1,62 @@
-import React, {useEffect, useState} from 'react';
-import { Button, Container, Row, Col, Image, Jumbotron} from 'react-bootstrap'
+import React, {useEffect, useState} from 'react'
+import { Button, Container, Row, Col, Image, Table, Jumbotron} from 'react-bootstrap'
 import Navigationbar from '../Navbar/Navbar'
-import { db } from '../../Configurations'
-import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux'
+import PaypalBtn from 'react-paypal-checkout';
+
 
 
 function Cart() {
-const { id } = useParams();
-const [products, setProd] = useState("");
-useEffect(()=>{
+const cart = useSelector(state => state.products)
+const dispatch = useDispatch()
+const client = {
+            sandbox:    'YOUR-SANDBOX-APP-ID',
+            production: 'YOUR-PRODUCTION-APP-ID',
+        }
 
-const docRef = db.collection("Products").doc(id);
-
-docRef.get().then((doc) => {
-    if (doc.exists) {
-        console.log("Document data:", doc.data());
-        setProd(doc.data())
-    } else {
-        console.log("No such document!");
-    }
-}).catch((error) => {
-    console.log("Error getting document:", error);
+const deleteProduct = (id) => {
+       dispatch({
+            type: 'REMOVE_PRODUCTS',
+            payload: id
+        })
+   }
+console.log(cart);
+let data = []
+let total = 0
+Object.keys(cart).map((item, i) => {
+  let key = i+1
+  total = total+parseInt(cart[item].price)
+  data.push(<tr>
+    <td>{key}</td>
+    <td>{cart[item].name}</td>
+    <td>{cart[item].price}</td>
+    <td> <button onClick={() => {deleteProduct(cart[item].id)}}>x</button> </td>
+  </tr>)
 })
-});
 
-//console.log(products.description);
+
   return(
     <>
     <Navigationbar />
 
     <Container style={{marginTop: '20px'}}>
     <Jumbotron>
-<h1>Hello, world!</h1>
-<p>
-  This is a simple hero unit, a simple jumbotron-style component for calling
-  extra attention to featured content or information.
-</p>
-<p>
-  <Button variant="primary">Learn more</Button>
-</p>
+    <Table striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Price in ( $ )</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+      {data}
+      </tbody>
+    </Table>
+    <p>Total: {total} $</p>
+    <PaypalBtn client={client} currency={'USD'} total={1.00} />
 </Jumbotron>
 
   </Container>
