@@ -4,19 +4,13 @@ import Navigationbar from '../Navbar/Navbar'
 import { db } from '../../Configurations'
 import { useParams } from "react-router-dom"
 import { useDispatch } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid';
 
 
 function Details() {
 const dispatch = useDispatch()
 const { id } = useParams();
 const [products, setProd] = useState("");
-
-function handleSubmit(name, price){
-       dispatch({
-           type: 'CHANGE_NAME',
-           payload: {"name": name, "price":price}
-       })
-   }
 
 useEffect(()=>{
 
@@ -32,9 +26,17 @@ docRef.get().then((doc) => {
 }).catch((error) => {
     console.log("Error getting document:", error);
 })
-});
+}, []);
 
 
+const handleSubmit = (name, price, img) => {
+
+       const serializedState = {"id":uuidv4(), "name": name, "price":price, "img": img}
+       dispatch({
+            type: 'ADD_PRODUCTS',
+            payload: serializedState
+        })
+   }
 
 //console.log(products.description);
   return(
@@ -53,7 +55,7 @@ docRef.get().then((doc) => {
       <p style={{ color: 'white'}}>Category by: <span style={{color: 'red'}}>{products.category}</span></p>
       <p style={{ color: 'white'}}>Price: <span style={{color: 'red'}}>{products.price}$</span></p>
 
-      <Button style={{backgroundColor: 'red', border: 'solid 1px red'}} onClick={handleSubmit(products.name, products.price)}>Add to Cart </Button>
+      <Button style={{backgroundColor: 'red', border: 'solid 1px red'}} onClick={() => handleSubmit(products.name, products.price, products.files)}>Add to Cart </Button>
       </Container>
       </Col>
     </Row>

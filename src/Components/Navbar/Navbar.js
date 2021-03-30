@@ -2,23 +2,24 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Navbar, Nav, Form, FormControl, Container} from 'react-bootstrap';
 import { ArrowRight, Cart, Person } from 'react-bootstrap-icons';
+import {Link } from 'react-router-dom'
 const Navigationbar = () => {
-const state = useSelector(state => state.user)
+const products = useSelector(state => state.products)
+console.log(products);
 
-//localStorage.setItem('products', '[{"id": 8,"img": "img1","img2": "img2","img3": "img3","name": "Product Name1","price": 265.90,"description": "Lorem ipsum dolor sit amet, consectetur."}]');
   return(
     <>
     <Navbar style={{backgroundColor: '#070720'}}>
     <Container>
-      <Navbar.Brand href="/" style={{color: 'white'}}>Game<span style={{color: 'red'}}>Zone</span></Navbar.Brand>
+      <Navbar.Brand to="/" style={{color: 'white'}}>Game<span style={{color: 'red'}}>Zone</span></Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/" style={{color: 'white'}}>Home</Nav.Link>
-        <Nav.Link href="#" style={{color: 'white'}}>Categories</Nav.Link>
-        <Nav.Link href="#" style={{color: 'white'}}>Contact</Nav.Link>
+        <Link to="/" style={{color: 'white', padding: '10px'}}>Home</Link>
+        <Link href="#" style={{color: 'white', padding: '10px'}}>Categories</Link>
+        <Link href="#" style={{color: 'white', padding: '10px'}}>Contact</Link>
       </Nav>
       <Form inline>
-        
-        <Nav.Link href="#" style={{color: 'white'}}><Cart size={40}/> ({state.length}) </Nav.Link>
+
+        <Link to="/cart" style={{color: 'white'}}><Cart size={40}/>({products.length})</Link>
       </Form>
       </Container>
     </Navbar>
